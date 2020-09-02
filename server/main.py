@@ -29,7 +29,4 @@ bucket = storage.Client(
 
 @app.get("/files")
 def files():
-    for blob in bucket.list_blobs(prefix="jsons"):
-        print("blob", f)
-
-    return {}
+    return [blob.public_url for blob in bucket.list_blobs(prefix="jsons/")]

@@ -21,32 +21,25 @@ def upload_files(templates_dir):
     client = storage.Client()
     bucket = client.get_bucket("remarkable-templates")
 
-    uploads = []
-
     for template in templates_json["templates"]:
-        blob = bucket.blob(f"templates/{uuid.uuid4()}.png")
+        file_uuid = uuid.uuid4()
+
+        blob = bucket.blob(f"templates/{file_uuid}.png")
         filename = (templates_dir / template["filename"]).with_suffix(".png")
         blob.upload_from_filename(filename=filename)
-        print(blob.public_url)
-        print("uploaded:", filename)
 
-        uploads.append(
-            {
-                "name": template["name"],
-                "url": blob.public_url,
-                "landscape": template.get("landscape", False),
-                "categories": template["categories"],
-            }
-        )
+        json_info = {
+            "name": template["name"],
+            "url": blob.public_url,
+            "landscape": template.get("landscape", False),
+            "categories": template["categories"],
+        }
 
-    uploads_json = templates_dir / "templates-gapi.json"
-    with open(uploads_json, "w") as out:
-        json.dump(uploads, out)
+        uploads_blob = bucket.blob(f"jsons/{file_uuid}.json")
+        uploads_blob.upload_from_string(json.dumps(json_info))
 
-    uploads_blob = bucket.blob("templates.json")
-    uploads_blob.upload_from_filename(filename=uploads_json)
+        print(f"uploaded: {file_uuid}")
 
-    print(uploads_blob.public_url)
 
 
 def main():
