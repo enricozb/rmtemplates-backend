@@ -1,0 +1,16 @@
+{
+"cors": [
+  {
+    "origin": [
+      "*"
+    ],
+    "method": [
+      "GET"
+    ],
+    "responseHeader": [
+      "*"
+    ],
+    "maxAgeSeconds": 3600
+  }
+]
+}
