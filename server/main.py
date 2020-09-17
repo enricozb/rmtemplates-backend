@@ -14,7 +14,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://0.0.0.0:8000", "https://rm.ezb.io"],
+    allow_origins=["http://0.0.0.0:8000", "http://rm.ezb.io", "https://rm.ezb.io"],
     allow_credentials=True,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
