@@ -48,7 +48,7 @@ def parse_file(img_file):
         raise ValueError("Image format must be PNG")
     elif pil_image.size != (1404, 1872):
         raise ValueError(
-            "Image dimensions must be 1404x1872. " "Landscape images are not rotated"
+            "Image dimensions must be 1404x1872. " "Don't rotate landscape images."
         )
 
     return b"".join(chunks)
