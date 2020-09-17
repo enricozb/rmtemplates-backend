@@ -23,12 +23,12 @@ def upload_files(templates_dir):
 
     for template in templates_json["templates"]:
         file_uuid = uuid.uuid4()
-
         blob = bucket.blob(f"templates/{file_uuid}.png")
         filename = (templates_dir / template["filename"]).with_suffix(".png")
         blob.upload_from_filename(filename=filename)
 
         json_info = {
+            "author": "reMarkable",
             "name": template["name"],
             "url": blob.public_url,
             "landscape": template.get("landscape", False),
