@@ -14,7 +14,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://0.0.0.0:8000", "https://ezb.io/remarkable-templates/"],
+    allow_origins=["http://0.0.0.0:8000", "https://ezb.io"],
     allow_credentials=True,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
